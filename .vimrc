@@ -23,6 +23,14 @@ set showmatch " mostra o correspondente de ( { [
 
 set autoindent " copia a indentação da linha corrente para a nova linha
 
+set smartindent " melhora a indentação
+
+set splitright " ao dividir a janela verticalmente, a nova ocupa a direita
+
+set splitbelow " ao dividir a janela horizontalmente, a nova ocupa abaixo
+
+set visualbell " não bipe
+
 set tabstop=4 " número de colunas para o comando <TAB>
 
 " número de espaços a serem usados para cada etapa de (auto) recuo. Usado para 'Cident', >>, <<, etc.
@@ -49,9 +57,9 @@ set wildmenu " autocompletar visual para o menu de comando
 
 set laststatus=2 " ativa a barra de status
 
-set list
+set list " mostra caracteres ocultos
 
-set listchars=tab:>-,eol:¬,trail:▸
+set listchars=tab:>-,eol:¬,trail:▸ " lista de caracteres ocultos
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Barra de Status
@@ -62,7 +70,7 @@ set statusline+=%2*%m
 set statusline+=%1*
 set statusline+=%=
 set statusline+=%-10y
-set statusline+=%3*%{(&fenc!=''?&fenc:&enc)}\[%{&ff}]
+set statusline+=%3*%9{(&fenc!=''?&fenc:&enc)}\[%{&ff}]
 set statusline+=%5p%%
 set statusline+=%=
 set statusline+=%5l
@@ -76,7 +84,16 @@ highlight SpecialKey guifg=red
 highlight ModeMsg ctermfg=black ctermbg=gray
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-autocmd BufNewFile,BufRead *.twig set syntax=html
+if has("autocmd")
+  autocmd BufNewFile,BufRead *.twig,*.blade.* setfiletype html
+  autocmd BufNewFile,BufRead *.yml setfiletype yaml
+  autocmd FileType yaml setlocal sw=2 ts=2 sts=2
+  autocmd FileType twig setlocal sw=2 ts=2 sts=2
+  autocmd FileType html setlocal sw=2 ts=2 sts=2
+  autocmd FileType css setlocal sw=2 ts=2 sts=2
+  autocmd FileType *.blade.* setlocal sw=2 ts=2 sts=2
+  autocmd FileType javascript setlocal sw=4 ts=4 sts=4
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
