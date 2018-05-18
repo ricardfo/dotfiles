@@ -1,6 +1,7 @@
 " Author  Ricardo Fontoura
 
 " Basic Settings {{{
+
 syntax enable " habilita syntax
 
 let mapleader=","
@@ -9,6 +10,8 @@ let maplocalleader="\\"
 set nocompatible " usa VIM padrão, não compatível com VI
 
 filetype plugin indent on " ativa a detecção do arquivo, plugin e recuo
+
+set pastetoggle=<F2> " para a indentação quando colar com o mouse
 
 set hlsearch incsearch smartcase " ativa o contraste de cores na busca de palavras e encontra em maiúsculo ou minisculo
 
@@ -42,7 +45,6 @@ set softtabstop=4
 " em recuos com os comandos '<' e '<'. E quando autoindent está ativado.
 set expandtab
 
-set pastetoggle=<F2> " para a indentação quando colar com o mouse
 
 "colorscheme darkblue " esquema de cores do vim
 
@@ -59,9 +61,11 @@ set laststatus=2 " ativa a barra de status
 set list " mostra caracteres ocultos
 
 set listchars=tab:>-,eol:¬,trail:▸ " lista de caracteres ocultos
+
 " }}}
 
 " Status Line {{{
+
 " mostrar o titulo do arquivo
 set statusline+=%1*%f
 set statusline+=%2*%m
@@ -80,15 +84,16 @@ highlight User3 ctermfg=white ctermbg=blue
 highlight NonText guifg=red
 highlight SpecialKey guifg=red
 highlight ModeMsg ctermfg=black ctermbg=gray
+
 " }}}
 
 " Vimscript file settings {{{
+
 if has("autocmd")
   autocmd BufNewFile,BufRead *.yml setlocal filetype=yaml
   autocmd FileType yaml setlocal sw=2 ts=2 sts=2
   autocmd FileType css setlocal sw=2 ts=2 sts=2
   autocmd FileType javascript setlocal sw=4 ts=4 sts=4
-  autocmd FileType php nnoremap <buffer> <localleader>c I#<esc>
 endif
 
 augroup filetype_html
@@ -101,9 +106,17 @@ augroup filetype_vim
   autocmd!
   autocmd FileType vim setlocal foldmethod=marker
 augroup END
+
+augroup filetype_php
+  autocmd!
+  autocmd FileType php nnoremap <buffer> <localleader>c I#<esc>
+  autocmd FileType php setlocal foldmethod=marker foldlevel=1 foldmarker={,}
+augroup END
+
 " }}}
 
 " Mappings {{{
+"
 " Desabilitando as setas
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -121,8 +134,11 @@ inoremap jk <esc>
 nnoremap <leader>n :set number!<CR>
 " alterna (exibe/oculta) caracteres invisiveis
 nnoremap <leader>l :set list!<CR>
+" alterna (exibe/oculta) destaque da pesquisa
+nnoremap <leader>s :set hlsearch!<CR>
 " coloca aspas na palavra abaixo do cursor
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 " coloca aspas simples na palavra abaixo do cursor
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
+
 " }}}
