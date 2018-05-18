@@ -1,11 +1,10 @@
 " Author  Ricardo Fontoura
 
-"""""""""""""""""""""""""""
-" configurações gerais
-"""""""""""""""""""""""""""
+" Basic Settings {{{
 syntax enable " habilita syntax
 
 let mapleader=","
+let maplocalleader="\\"
 
 set nocompatible " usa VIM padrão, não compatível com VI
 
@@ -60,10 +59,9 @@ set laststatus=2 " ativa a barra de status
 set list " mostra caracteres ocultos
 
 set listchars=tab:>-,eol:¬,trail:▸ " lista de caracteres ocultos
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""
-" Barra de Status
-"""""""""""""""""""""""""""""""""""""""""""""""""
+" Status Line {{{
 " mostrar o titulo do arquivo
 set statusline+=%1*%f
 set statusline+=%2*%m
@@ -82,22 +80,30 @@ highlight User3 ctermfg=white ctermbg=blue
 highlight NonText guifg=red
 highlight SpecialKey guifg=red
 highlight ModeMsg ctermfg=black ctermbg=gray
-"""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
 
+" Vimscript file settings {{{
 if has("autocmd")
-  autocmd BufNewFile,BufRead *.twig,*.blade.* setfiletype html
-  autocmd BufNewFile,BufRead *.yml setfiletype yaml
+  autocmd BufNewFile,BufRead *.yml setlocal filetype=yaml
   autocmd FileType yaml setlocal sw=2 ts=2 sts=2
-  autocmd FileType twig setlocal sw=2 ts=2 sts=2
-  autocmd FileType html setlocal sw=2 ts=2 sts=2
   autocmd FileType css setlocal sw=2 ts=2 sts=2
-  autocmd FileType *.blade.* setlocal sw=2 ts=2 sts=2
   autocmd FileType javascript setlocal sw=4 ts=4 sts=4
+  autocmd FileType php nnoremap <buffer> <localleader>c I#<esc>
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""
-" Mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""
+augroup filetype_html
+  autocmd!
+  autocmd BufNewFile,BufRead *.twig,*.blade.php setlocal filetype=html
+  autocmd FileType html,twig,blade.php setlocal sw=2 ts=2 sts=2
+augroup END
+
+augroup filetype_vim
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
+
+" Mappings {{{
 " Desabilitando as setas
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -108,5 +114,15 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-inoremap jj <ESC>
-inoremap ( ()<esc>i
+inoremap <esc> <nop>
+inoremap jk <esc>
+
+" alterna (exibe/oculta) números
+nnoremap <leader>n :set number!<CR>
+" alterna (exibe/oculta) caracteres invisiveis
+nnoremap <leader>l :set list!<CR>
+" coloca aspas na palavra abaixo do cursor
+nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
+" coloca aspas simples na palavra abaixo do cursor
+nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
+" }}}
