@@ -45,7 +45,6 @@ set softtabstop=4
 " em recuos com os comandos '<' e '<'. E quando autoindent está ativado.
 set expandtab
 
-
 "colorscheme darkblue " esquema de cores do vim
 
 set background=dark
@@ -90,28 +89,30 @@ highlight ModeMsg ctermfg=black ctermbg=gray
 " Vimscript file settings {{{
 
 if has("autocmd")
-  autocmd BufNewFile,BufRead *.yml setlocal filetype=yaml
-  autocmd FileType yaml setlocal sw=2 ts=2 sts=2
-  autocmd FileType css setlocal sw=2 ts=2 sts=2
-  autocmd FileType javascript setlocal sw=4 ts=4 sts=4
+
+    autocmd BufNewFile,BufRead *.yml setlocal filetype=yaml
+    autocmd FileType yaml setlocal sw=2 ts=2 sts=2
+    autocmd FileType css setlocal sw=2 ts=2 sts=2
+    autocmd FileType javascript setlocal sw=4 ts=4 sts=4
+
+    augroup filetype_html
+      autocmd!
+      autocmd BufNewFile,BufRead *.twig,*.blade.php setlocal filetype=html
+      autocmd FileType html,twig,blade.php setlocal sw=2 ts=2 sts=2
+    augroup END
+
+    augroup filetype_vim
+      autocmd!
+      autocmd FileType vim setlocal foldmethod=marker
+    augroup END
+
+    augroup filetype_php
+      autocmd!
+      autocmd FileType php nnoremap <buffer> <localleader>c I#<esc>
+      autocmd FileType php setlocal foldmethod=marker foldlevel=1 foldmarker={,}
+    augroup END
+
 endif
-
-augroup filetype_html
-  autocmd!
-  autocmd BufNewFile,BufRead *.twig,*.blade.php setlocal filetype=html
-  autocmd FileType html,twig,blade.php setlocal sw=2 ts=2 sts=2
-augroup END
-
-augroup filetype_vim
-  autocmd!
-  autocmd FileType vim setlocal foldmethod=marker
-augroup END
-
-augroup filetype_php
-  autocmd!
-  autocmd FileType php nnoremap <buffer> <localleader>c I#<esc>
-  autocmd FileType php setlocal foldmethod=marker foldlevel=1 foldmarker={,}
-augroup END
 
 " }}}
 
@@ -127,7 +128,7 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-inoremap <esc> <nop>
+"inoremap <esc> <nop>
 inoremap jk <esc>
 
 " alterna (exibe/oculta) números
