@@ -61,6 +61,8 @@ set list " mostra caracteres ocultos
 
 set listchars=tab:>-,eol:¬,trail:▸ " lista de caracteres ocultos
 
+set ttyfast " envia mais caracteres ao terminal, melhorando o redraw de janelas
+
 " }}}
 
 " Status Line {{{
@@ -94,6 +96,7 @@ if has("autocmd")
     autocmd FileType yaml setlocal sw=2 ts=2 sts=2
     autocmd FileType css setlocal sw=2 ts=2 sts=2
     autocmd FileType javascript setlocal sw=4 ts=4 sts=4
+    autocmd FileType json setlocal sw=4 ts=4 sts=4
 
     augroup filetype_html
       autocmd!
