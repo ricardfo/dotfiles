@@ -7,6 +7,14 @@ syntax enable " habilita syntax
 let mapleader=","
 let maplocalleader="\\"
 
+let g:netrw_banner = 1
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 2
+let g:netrw_altv = 1
+let g:netrw_winsize = 80
+let g:netrw_sort_options = 'i'
+autocmd FileType netrw setl bufhidden=delete
+
 set nocompatible " usa VIM padrão, não compatível com VI
 
 filetype plugin indent on " ativa a detecção do arquivo, plugin e recuo
@@ -144,5 +152,8 @@ nnoremap <leader>s :set hlsearch!<CR>
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 " coloca aspas simples na palavra abaixo do cursor
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
+
+"set autochdir
+"nnoremap gf :vertical wincmd f<CR>
 
 " }}}
