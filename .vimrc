@@ -153,6 +153,12 @@ nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 " coloca aspas simples na palavra abaixo do cursor
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
 
+"control + direction to change panes
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+
 "set autochdir
 "nnoremap gf :vertical wincmd f<CR>
 
