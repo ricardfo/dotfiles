@@ -1,1 +1,1 @@
-# My personal vimrc
+# My personal config to vimrc and tmux
