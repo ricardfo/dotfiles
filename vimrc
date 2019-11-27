@@ -27,6 +27,8 @@ set ruler " habilita informções da posição do cursor
 
 set number " habilita numeração das linhas do arquivo
 
+set relativenumber
+
 set showcmd " mostra comandos sendo executados
 
 set showmatch " mostra o correspondente de ( { [
@@ -53,7 +55,13 @@ set softtabstop=4
 " em recuos com os comandos '<' e '<'. E quando autoindent está ativado.
 set expandtab
 
+" redesenha quando necessário
+set lazyredraw
+
 "colorscheme darkblue " esquema de cores do vim
+colorscheme molokai
+
+let g:rehash256 = 1
 
 set background=dark
 
@@ -100,6 +108,7 @@ highlight ModeMsg ctermfg=black ctermbg=gray
 
 if has("autocmd")
 
+    autocmd BufWritePre *.php,*.py,*.js,*.txt,*.md,*.css :call <SID>StripTrailingWhitespaces()
     autocmd BufNewFile,BufRead *.yml setlocal filetype=yaml
     autocmd FileType yaml setlocal sw=2 ts=2 sts=2
     autocmd FileType css setlocal sw=2 ts=2 sts=2
@@ -125,6 +134,21 @@ if has("autocmd")
 
 endif
 
+" }}}
+
+" Custom Functions {{{
+
+" tira os espaços em branco à direita no final dos arquivos.
+" Isto é chamado na gravação do buffer do grupo acima.
+function! <SID>StripTrailingWhitespaces()
+    " save last search & cursor position
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    let @/=_s
+    call cursor(l, c)
+endfunc
 " }}}
 
 " Mappings {{{
