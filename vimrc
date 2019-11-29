@@ -23,11 +23,9 @@ set pastetoggle=<F2> " para a indentação quando colar com o mouse
 
 set hlsearch incsearch smartcase " ativa o contraste de cores na busca de palavras e encontra em maiúsculo ou minisculo
 
-set ruler " habilita informções da posição do cursor
+set ruler relativenumber " habilita informções da posição do cursor
 
 set number " habilita numeração das linhas do arquivo
-
-set relativenumber
 
 set showcmd " mostra comandos sendo executados
 
@@ -167,7 +165,7 @@ inoremap <right> <nop>
 inoremap jk <esc>
 
 " alterna (exibe/oculta) números
-nnoremap <leader>n :set number!<CR>
+nnoremap <leader>n :set number! relativenumber!<CR>
 " alterna (exibe/oculta) caracteres invisiveis
 nnoremap <leader>l :set list!<CR>
 " alterna (exibe/oculta) destaque da pesquisa
