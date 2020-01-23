@@ -49,6 +49,9 @@ set shiftwidth=4
 " número de espaços que um <TAB> conta para enquanto executa a edição de operações, como inserir um <TAB> ou usando <BS>.
 set softtabstop=4
 
+" This is a list of directories which will be searched when using :find command
+set path+=**
+
 " no modo inserir use o número apropriado de espaços para inserir um <TAB>. Os espaços são usados
 " em recuos com os comandos '<' e '<'. E quando autoindent está ativado.
 set expandtab
