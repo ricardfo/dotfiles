@@ -11,7 +11,7 @@ let g:netrw_banner = 1
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 2
 let g:netrw_altv = 1
-let g:netrw_winsize = 80
+let g:netrw_winsize = 75
 let g:netrw_sort_options = 'i'
 autocmd FileType netrw setl bufhidden=delete
 
@@ -61,6 +61,9 @@ set lazyredraw
 
 "colorscheme darkblue " esquema de cores do vim
 colorscheme molokai
+
+"deixa a linha do cursor em destaque
+set cursorline
 
 let g:rehash256 = 1
 
@@ -187,4 +190,5 @@ noremap <C-k> <C-w>k
 "set autochdir
 "nnoremap gf :vertical wincmd f<CR>
 
+noremap <leader>h :read ~/.vim/templates/skeleton.html<CR>
 " }}}
