@@ -83,6 +83,14 @@ set listchars=tab:>-,eol:¬,trail:▸ " lista de caracteres ocultos
 
 set ttyfast " envia mais caracteres ao terminal, melhorando o redraw de janelas
 
+" Make it obvious where 80 characters is
+set textwidth=80
+set colorcolumn=+1
+
+"set tagrelative
+"ctags -R -f .git/tags .
+set tags+=.git/tags;tags
+
 " }}}
 
 " Status Line {{{
@@ -136,6 +144,9 @@ if has("autocmd")
       autocmd FileType php setlocal foldmethod=marker foldlevel=1 foldmarker={,}
     augroup END
 
+    " Don't automatically continue comments after newline
+    autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
+
 endif
 
 " }}}
@@ -153,6 +164,31 @@ function! <SID>StripTrailingWhitespaces()
     let @/=_s
     call cursor(l, c)
 endfunc
+
+function! DelTagOfFile(file)
+  let fullpath = a:file
+  let cwd = getcwd()
+  let tagfilename = cwd . "/.git/tags"
+  let f = substitute(fullpath, cwd . "/", "", "")
+  let f = escape(f, './')
+  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
+  let resp = system(cmd)
+endfunction
+
+function! UpdateTags()
+  let f = expand("%:p")
+  let cwd = getcwd()
+  let tagfilename = cwd . "/.git/tags"
+
+  if filereadable(tagfilename)
+    let cmd = 'ctags -R -f ' . tagfilename . ' "' . f . '"'
+    call DelTagOfFile(f)
+    let resp = system(cmd)
+  endif
+endfunction
+
+autocmd BufWritePost *.php silent! call UpdateTags() &
+
 " }}}
 
 " Mappings {{{
@@ -166,6 +202,10 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+
+" Move up and down by visible lines if current line is wrapped
+nnoremap j gj
+nnoremap k gk
 
 "inoremap <esc> <nop>
 inoremap jk <esc>
