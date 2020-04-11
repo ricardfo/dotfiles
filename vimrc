@@ -7,9 +7,9 @@ syntax enable " habilita syntax
 let mapleader=","
 let maplocalleader="\\"
 
-let g:netrw_banner = 1
+let g:netrw_banner = 0
 let g:netrw_liststyle = 3
-let g:netrw_browse_split = 2
+let g:netrw_browse_split = 3
 let g:netrw_altv = 1
 let g:netrw_winsize = 75
 let g:netrw_sort_options = 'i'
@@ -90,6 +90,8 @@ set colorcolumn=+1
 "set tagrelative
 "ctags -R -f .git/tags .
 set tags+=.git/tags;tags
+
+set tabline=%!MyTabLine()
 
 " }}}
 
@@ -189,6 +191,50 @@ endfunction
 
 autocmd BufWritePost *.php silent! call UpdateTags() &
 
+" cleans up the way the default tabline looks
+" will show tab numbers next to the basename of the file
+" from :help setting-tabline
+function! MyTabLine()
+  let s = ''
+  for i in range(tabpagenr('$'))
+    " select the highlighting
+    if i + 1 == tabpagenr()
+      let s .= '%#TabLineSel#'
+    else
+      let s .= '%#TabLine#'
+    endif
+
+    let s .= '[' . (i + 1) . ']' " set the tab page number (for viewing)
+    let s .= '%' . (i + 1) . 'T' " set the tab page number (for mouse clicks)
+    let s .= '%{MyTabLabel(' . (i + 1) . ')} ' " the label is made by MyTabLabel()
+  endfor
+
+  " after the last tab fill with TabLineFill and reset tab page nr
+  let s .= '%#TabLineFill#%T'
+  return s
+endfunction
+
+" with help from http://vim.wikia.com/wiki/Show_tab_number_in_your_tab_line
+function! MyTabLabel(n)
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  let bufnr = buflist[winnr - 1]
+  let file = bufname(bufnr)
+  let buftype = getbufvar(bufnr, 'buftype')
+
+  if buftype == 'nofile'
+    if file =~ '\/.'
+      let file = substitute(file, '.*\/\ze.', '', '')
+    endif
+  else
+    let file = fnamemodify(file, ':p:t')
+  endif
+  if file == ''
+    let file = '[No Name]'
+  endif
+  return file
+endfunction
+
 " }}}
 
 " Mappings {{{
@@ -231,4 +277,14 @@ noremap <C-k> <C-w>k
 "nnoremap gf :vertical wincmd f<CR>
 
 noremap <leader>h :read ~/.vim/templates/skeleton.html<CR>
+
+nnoremap ç :
+
+" Shift + direção para mudar de tabs
+noremap <S-l> gt
+noremap <S-h> gT
+
+vmap <silent> <leader>c :norm i#<ESC>
+
+
 " }}}
