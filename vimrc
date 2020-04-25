@@ -13,6 +13,8 @@ let g:netrw_browse_split = 3
 let g:netrw_altv = 1
 let g:netrw_winsize = 75
 let g:netrw_sort_options = 'i'
+let g:netrw_hide = 1
+let g:netrw_list_hide= '^\.git/$,^\.vagrant/$'
 autocmd FileType netrw setl bufhidden=delete
 
 set nocompatible " usa VIM padrão, não compatível com VI
@@ -88,7 +90,6 @@ set textwidth=80
 set colorcolumn=+1
 
 "set tagrelative
-"ctags -R -f .git/tags .
 set tags+=.git/tags;tags
 
 set tabline=%!MyTabLine()
@@ -286,5 +287,7 @@ noremap <S-h> gT
 
 vmap <silent> <leader>c :norm i#<ESC>
 
+"executa ctags -R -f .git/tags .
+nnoremap <leader>ct :!ctags -Rf .git/tags .<cr><cr>
 
 " }}}
