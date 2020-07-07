@@ -150,6 +150,8 @@ if has("autocmd")
     " Don't automatically continue comments after newline
     autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 
+    autocmd Filetype gitcommit setlocal spell textwidth=72
+
 endif
 
 " }}}
@@ -251,7 +253,7 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 
 " Move up and down by visible lines if current line is wrapped
-nnoremap j gj
+" nnoremap j gj
 nnoremap k gk
 
 "inoremap <esc> <nop>
