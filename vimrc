@@ -19,6 +19,8 @@ autocmd FileType netrw setl bufhidden=delete
 
 set nocompatible " usa VIM padrão, não compatível com VI
 
+set termguicolors
+
 filetype plugin indent on " ativa a detecção do arquivo, plugin e recuo
 
 set pastetoggle=<F2> " para a indentação quando colar com o mouse
@@ -62,7 +64,7 @@ set expandtab
 set lazyredraw
 
 "colorscheme darkblue " esquema de cores do vim
-colorscheme darkblue
+colorscheme nord
 
 "deixa a linha do cursor em destaque
 set cursorline
