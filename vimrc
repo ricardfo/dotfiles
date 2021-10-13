@@ -62,7 +62,7 @@ set expandtab
 set lazyredraw
 
 "colorscheme darkblue " esquema de cores do vim
-colorscheme molokai
+colorscheme darkblue
 
 "deixa a linha do cursor em destaque
 set cursorline
