@@ -125,8 +125,8 @@ highlight ModeMsg ctermfg=black ctermbg=gray
 
 if has("autocmd")
 
-    autocmd BufWritePre *.php,*.py,*.js,*.txt,*.md,*.css :call <SID>StripTrailingWhitespaces()
-    autocmd BufNewFile,BufRead *.yml setlocal filetype=yaml
+    autocmd BufWritePre *.php,*.py,*.js,*.txt,*.md,*.css,*.yml :call <SID>StripTrailingWhitespaces()
+    autocmd BufNewFile,BufReadPost *.yml setlocal filetype=yaml
     autocmd FileType yaml setlocal sw=2 ts=2 sts=2
     autocmd FileType css setlocal sw=2 ts=2 sts=2
     autocmd FileType javascript setlocal sw=4 ts=4 sts=4
@@ -284,6 +284,8 @@ noremap <C-k> <C-w>k
 noremap <leader>h :read ~/.vim/templates/skeleton.html<CR>
 
 nnoremap ç :
+
+noremap \ ,
 
 " Shift + direção para mudar de tabs
 noremap <S-l> gt
