@@ -6,10 +6,10 @@
     status = auto
 [diff]
     tool = vimdiff
-[core]
-    editor = vim
 [pull]
-    ff = only
+    rebase = false
+[core]
+    editor = nvim
 [alias]
     gl = log --graph --pretty=format:'%Cred%h%Creset - %Cblue%an%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
     l = log --pretty=format:'%C(yellow)%h%Creset - %Cblue%an%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
