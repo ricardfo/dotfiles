@@ -11,11 +11,10 @@ autocmd({"BufRead", "BufNewFile"}, {
 augroup("setIndent", { clear = true })
 autocmd("FileType", {
   group = "setIndent",
-  pattern = { "yaml", "css", "text", "markdown", "html", "javascript", "lua", "twig", "*.blade.php" },
+  pattern = { "yaml", "css", "text", "markdown", "html", "javascript", "lua", "twig" },
   command = "setlocal sw=2 ts=2 sts=2"
 })
 
--- remove espaços em brancos no final da linha
 autocmd({"BufWritePre"}, {
     pattern = {"*"},
     callback = function(ev)
