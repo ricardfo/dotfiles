@@ -68,5 +68,8 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
+-- toggle elements
+keymap('n', '<leader>s', '<cmd>set hlsearch!<cr>', opts)
+keymap('n', '<leader>sn', '<cmd>set number! relativenumber!<cr>', opts)
 
 
