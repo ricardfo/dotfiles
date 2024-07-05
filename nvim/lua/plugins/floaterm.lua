@@ -3,6 +3,9 @@ return {
     keys = {
       {"<leader>t",":FloatermToggle<CR>", mode = "n"},
       {"<leader>t", "<C-\\><C-n>:FloatermToggle<CR>", mode = "t"},
+      {"<leader>n", "<C-\\><C-n>:FloatermNew<CR>", mode = "t"},
+      {"<leader>h", "<C-\\><C-n>:FloatermPrev<CR>", mode = "t"},
+      {"<leader>l", "<C-\\><C-n>:FloatermLast<CR>", mode = "t"},
     },
     config = function()
       vim.g.floaterm_gitcommit = 'floaterm'
