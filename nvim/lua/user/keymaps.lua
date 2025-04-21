@@ -75,4 +75,6 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 keymap('n', '<leader>s', '<cmd>set hlsearch!<cr>', opts)
 keymap('n', '<leader>sn', '<cmd>set number! relativenumber!<cr>', opts)
 
-
+-- COMMENTS ------------------------------------------------------------------
+keymap("n", "<leader>c", "gcc", { noremap = false })
+keymap("v", "<leader>c", "gcc", { noremap = false })
